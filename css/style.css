@@ -1,0 +1,470 @@
+:root {
+    color-scheme: dark;
+    --cream: #fff3da;
+    --gold: #ffc96a;
+    --ink: #17241f;
+    --serif: Georgia, "Times New Roman", serif;
+    --sans: "Segoe UI", Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+    margin: 0;
+    background: var(--ink);
+    color: var(--cream);
+    font-family: var(--sans);
+    line-height: 1.5;
+}
+
+a { color: inherit; }
+a:focus-visible { outline: 3px solid var(--gold); outline-offset: 5px; }
+
+.topbar {
+    height: 82px;
+    padding: 0 7%;
+    position: fixed;
+    z-index: 20;
+    inset: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(180deg, rgba(8, 20, 19, .48), transparent);
+}
+
+.wordmark {
+    color: white;
+    font-size: 19px;
+    font-weight: 900;
+    letter-spacing: .06em;
+    text-decoration: none;
+}
+
+.wordmark span { margin-left: 5px; color: var(--gold); font-size: 11px; letter-spacing: .2em; }
+
+.sources-button {
+    padding: 10px 18px;
+    border: 1px solid rgba(255,255,255,.55);
+    border-radius: 30px;
+    color: white;
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: color .2s, background .2s;
+}
+
+.sources-button:hover { background: white; color: var(--ink); }
+
+.film-status {
+    position: fixed;
+    z-index: 20;
+    top: 76px;
+    right: 7%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: white;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: .08em;
+    text-shadow: 0 2px 8px rgba(0,0,0,.7);
+}
+
+.progress-track {
+    width: 120px;
+    height: 4px;
+    overflow: hidden;
+    border-radius: 4px;
+    background: rgba(255,255,255,.4);
+}
+
+#film-progress {
+    width: 0;
+    height: 100%;
+    display: block;
+    background: var(--gold);
+    transition: width 1s linear;
+}
+
+.film-scene {
+    min-height: 620px;
+    height: 100svh;
+    max-height: 1050px;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    scroll-margin-top: 0;
+}
+
+.opening {
+    height: max(680px, 100svh);
+    max-height: 1100px;
+    background: linear-gradient(180deg, #667d86 0%, #e0a16e 50%, #574742 100%);
+}
+
+.opening::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    background: linear-gradient(90deg, rgba(13,25,25,.66), rgba(13,25,25,.38) 46%, transparent 76%);
+}
+
+.opening-sky {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(27,54,67,.22), transparent 44%, rgba(32,26,29,.28));
+}
+
+.sun {
+    width: clamp(100px, 15vw, 205px);
+    aspect-ratio: 1;
+    position: absolute;
+    top: 17%;
+    right: 22%;
+    border-radius: 50%;
+    background: #ffe0a2;
+    box-shadow: 0 0 90px 30px rgba(255,207,129,.45);
+    animation: sunset 10s ease-in-out infinite alternate;
+}
+
+.mountain { position: absolute; right: -5%; bottom: 23%; left: -5%; }
+
+.mountain-far {
+    height: 57%;
+    background: #75817b;
+    clip-path: polygon(0 76%, 18% 34%, 30% 56%, 48% 12%, 66% 56%, 80% 30%, 100% 73%, 100% 100%, 0 100%);
+    animation: distant-shift 20s ease-in-out infinite alternate;
+}
+
+.mountain-near {
+    height: 43%;
+    background: linear-gradient(120deg, #384c43, #64705a 50%, #293b39);
+    clip-path: polygon(0 45%, 18% 12%, 31% 49%, 51% 17%, 68% 47%, 82% 9%, 100% 43%, 100% 100%, 0 100%);
+}
+
+.river {
+    height: 37%;
+    position: absolute;
+    right: -5%;
+    bottom: -6%;
+    left: -5%;
+    background: linear-gradient(165deg, transparent 0 16%, #728d8a 17% 23%, #527679 24% 58%, #344f55 59% 100%);
+    transform: rotate(-3deg);
+}
+
+.river::after, .river-reflection::after {
+    content: "";
+    position: absolute;
+    inset: 35% 0 0;
+    background: repeating-linear-gradient(175deg, transparent 0 20px, rgba(255,228,175,.22) 21px 23px, transparent 24px 45px);
+    animation: water-shimmer 4s ease-in-out infinite alternate;
+}
+
+.bridge {
+    width: 52%;
+    height: 210px;
+    position: absolute;
+    z-index: 2;
+    right: 6%;
+    bottom: 25%;
+    animation: bridge-arrival 1.7s both;
+}
+
+.bridge-walkway {
+    height: 19px;
+    position: absolute;
+    z-index: 3;
+    top: 21%;
+    right: 0;
+    left: 0;
+    background: #e8ce9a;
+    transform: rotate(-5deg);
+    box-shadow: 0 5px 0 rgba(87,58,43,.5);
+}
+
+.bridge-arch {
+    width: 33%;
+    height: 78%;
+    position: absolute;
+    bottom: 0;
+    border: 15px solid #d5ba89;
+    border-bottom: 0;
+    border-radius: 100% 100% 0 0;
+    filter: drop-shadow(7px 8px 4px rgba(23,26,28,.33));
+}
+
+.arch-one { left: 2%; }
+.arch-two { left: 35%; transform: scale(.8); transform-origin: bottom; }
+.arch-three { right: 0; transform: scale(.67); transform-origin: bottom; }
+
+.traveller, .figure, .cave-explorer {
+    width: 25px;
+    height: 78px;
+    position: absolute;
+    z-index: 4;
+    display: block;
+    color: #242927;
+    transform-origin: bottom center;
+}
+
+.traveller { top: -30px; left: 48%; animation: walk-across 8s linear infinite; }
+.traveller-two { top: -30px; left: 28%; transform: scale(.78); animation: walk-across-two 11s linear infinite; }
+
+.traveller i, .figure i, .cave-explorer i {
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    top: 0;
+    left: 5px;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+.traveller b, .figure b, .cave-explorer b {
+    width: 18px;
+    height: 43px;
+    position: absolute;
+    top: 14px;
+    left: 4px;
+    border-radius: 12px 12px 5px 5px;
+    background: currentColor;
+}
+
+.traveller b::before, .traveller b::after, .figure b::before, .figure b::after, .cave-explorer b::before, .cave-explorer b::after {
+    content: "";
+    width: 7px;
+    height: 29px;
+    position: absolute;
+    top: 35px;
+    left: 2px;
+    border-radius: 8px;
+    background: currentColor;
+    transform-origin: top;
+    animation: walking-legs .6s ease-in-out infinite alternate;
+}
+
+.traveller b::after, .figure b::after, .cave-explorer b::after { left: 10px; animation-delay: -.6s; }
+.traveller-two b { background: #332d28; }
+
+.opening-copy {
+    width: min(660px, 68%);
+    position: absolute;
+    z-index: 5;
+    top: 19%;
+    left: 8%;
+    animation: appear 1.2s .3s both;
+}
+
+.scene-label {
+    margin: 0 0 22px;
+    color: var(--gold);
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: .2em;
+    line-height: 1.5;
+}
+
+.opening h1, .scene-copy h2, .sources-heading h1, .end-card h2 {
+    margin: 0;
+    font-family: var(--serif);
+    font-size: clamp(56px, 7vw, 94px);
+    font-weight: 400;
+    letter-spacing: -.055em;
+    line-height: .96;
+    text-shadow: 0 4px 35px rgba(0,0,0,.24);
+}
+
+.opening h1 em, .scene-copy h2 em, .sources-heading h1 em, .end-card h2 em { color: var(--gold); font-weight: 400; }
+.opening-copy > p:not(.scene-label) { max-width: 520px; margin: 23px 0 24px; color: white; font-size: clamp(22px, 2.1vw, 26px); text-shadow: 0 2px 10px rgba(0,0,0,.75); }
+.scroll-link { display: inline-flex; gap: 15px; align-items: center; color: white; font-size: 19px; font-weight: 800; text-decoration: none; }
+.scroll-link span { display: inline-grid; width: 37px; height: 37px; place-items: center; border: 1px solid rgba(255,255,255,.75); border-radius: 50%; animation: bob 1.5s ease-in-out infinite; }
+
+.film-credit {
+    position: absolute;
+    z-index: 8;
+    right: 6%;
+    bottom: 30px;
+    color: rgba(255,255,255,.78);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: .16em;
+}
+
+.film-grain {
+    position: absolute;
+    z-index: 7;
+    inset: 0;
+    pointer-events: none;
+    opacity: .08;
+    background: repeating-linear-gradient(0deg, transparent 0 5px, rgba(255,255,255,.1) 6px, transparent 7px);
+    animation: grain-drift .7s steps(2) infinite;
+}
+
+.bridge-scene::after, .stones-scene::after, .cave-scene::after {
+    content: "";
+    position: absolute;
+    z-index: 3;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(90deg, rgba(7,15,16,.88), rgba(7,15,16,.68) 43%, rgba(7,15,16,.12) 82%);
+}
+
+.bridge-scene { background: linear-gradient(120deg, #684f46, #9e6d51 55%, #3b5555); }
+.scene-backdrop { position: absolute; inset: 0; overflow: hidden; background: linear-gradient(180deg,#526a73 0%,#d19a6c 57%,#566d6c 58%); }
+.scene-backdrop::before { content: ""; position: absolute; inset: 20% 0 0; background: linear-gradient(150deg, transparent 0 18%, #6f7569 18.5% 30%, transparent 30.5% 58%, #626b5c 58.5% 77%, transparent 77.5%); }
+.old-town { width: 34%; height: 43%; position: absolute; bottom: 29%; background: repeating-linear-gradient(90deg, #493e38 0 48px, #ba8c67 49px 93px, #53443c 94px 104px); clip-path: polygon(0 42%, 13% 42%, 13% 28%, 31% 28%, 31% 37%, 50% 37%, 50% 16%, 64% 16%, 64% 0, 76% 0, 76% 36%, 100% 36%, 100% 100%, 0 100%); box-shadow: inset 0 -18px rgba(0,0,0,.24); }
+.town-left { left: 0; animation: city-glow 5s ease-in-out infinite alternate; }
+.town-right { right: 0; transform: scaleX(-1); }
+.old-town::after { content: ""; position: absolute; inset: 42% 0 0; background: repeating-linear-gradient(90deg, transparent 0 12px, rgba(255,213,147,.88) 13px 20px, transparent 21px 46px); }
+.river-reflection { height: 34%; position: absolute; right: 0; bottom: 0; left: 0; background: repeating-linear-gradient(178deg,#557b7b 0 17px,#8f8c72 18px 22px,#3e6369 23px 41px); animation: water-shimmer 4s ease-in-out infinite alternate; }
+.stone-bridge { width: 53%; height: 37%; position: absolute; z-index: 4; bottom: 25%; left: 24%; border-bottom: 17px solid #bca27d; background: linear-gradient(160deg, transparent 0 46%, #bca27d 47% 54%, transparent 55%); filter: drop-shadow(0 8px 7px rgba(0,0,0,.35)); }
+.stone-bridge > span { width: 57%; height: 100%; position: absolute; bottom: -2px; left: 22%; border: 19px solid #c9ad83; border-bottom: 0; border-radius: 100% 100% 0 0; }
+.figure-walking { bottom: 50%; left: 61%; color: #242923; animation: walk-in-place 2s ease-in-out infinite; }
+.scene-copy { width: min(600px, 56%); position: absolute; z-index: 6; top: 22%; left: 8%; animation: appear 1s both; }
+.scene-copy h2 { font-size: clamp(54px, 6.5vw, 86px); }
+.scene-copy > p:not(.scene-label) { max-width: 570px; margin: 23px 0 16px; color: white; font-size: clamp(21px, 1.9vw, 25px); line-height: 1.5; text-shadow: 0 2px 14px rgba(0,0,0,.8); }
+.source-link { display: inline-block; padding-bottom: 3px; border-bottom: 2px solid var(--gold); color: white; font-size: 18px; font-weight: 800; text-decoration: none; }
+.source-link span { padding-left: 8px; color: var(--gold); }
+
+.stones-scene { background: linear-gradient(180deg,#606968,#a09b7d 54%,#526052); }
+.stones-scene::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg,rgba(18,30,31,.2),transparent 42%,rgba(15,26,24,.4)); }
+.stone-field { position: absolute; inset: 0; overflow: hidden; }
+.stecci { position: absolute; bottom: 20%; display: grid; place-items: center; border: 2px solid rgba(246,219,168,.64); border-radius: 42% 42% 4px 4px; background: linear-gradient(125deg,#b8aa87,#6a6f60); box-shadow: 16px 27px 25px rgba(25,34,30,.3); color: #645e4b; font-size: 44px; animation: stone-rise 1.5s both, stone-breathe 6s ease-in-out infinite alternate; }
+.stecci-small { width: 110px; height: 155px; right: 21%; animation-delay: .2s, -1s; }
+.stecci-tall { width: 145px; height: 228px; right: 37%; animation-delay: .1s, -4s; }
+.stecci-wide { width: 96px; height: 142px; right: 6%; animation-delay: .4s, -2s; }
+.mist { height: 160px; position: absolute; z-index: 4; right: -15%; bottom: 9%; left: -15%; border-radius: 50%; background: rgba(228,225,199,.28); filter: blur(35px); }
+.mist-one { animation: mist-drift 14s ease-in-out infinite alternate; }
+.mist-two { bottom: 34%; opacity: .6; animation: mist-drift 20s ease-in-out infinite alternate-reverse; }
+.stones-scene .scene-copy { top: 22%; }
+
+.cave-scene { background: radial-gradient(ellipse at 60% 72%,#236c67,#112e2c 46%,#101817 78%); }
+.cave-mouth { position: absolute; inset: -8%; background: radial-gradient(ellipse at 66% 65%,transparent 0 24%,#07100f 25% 44%,transparent 45%); }
+.cave-rock { width: 36%; height: 66%; position: absolute; bottom: 0; background: linear-gradient(110deg,#3b4741,#111a18); clip-path: polygon(0 0,100% 25%,100% 100%,0 100%); }
+.rock-left { left: 0; }
+.rock-right { right: 0; transform: scaleX(-1); }
+.cave-light { width: 320px; height: 320px; position: absolute; z-index: 1; top: 29%; right: 18%; border-radius: 50%; background: rgba(89,219,192,.35); filter: blur(80px); animation: cave-pulse 4s ease-in-out infinite alternate; }
+.cave-pool { width: 46%; height: 52px; position: absolute; z-index: 2; right: 13%; bottom: 14%; border-radius: 50%; background: linear-gradient(90deg,#217a70,#58cab0,#164f51); box-shadow: 0 0 45px rgba(89,219,192,.4); animation: pool-glow 3s ease-in-out infinite alternate; }
+.cave-explorer { width: 28px; height: 91px; z-index: 4; right: 34%; bottom: 17%; color: #111a17; animation: explorer-look 5s ease-in-out infinite; }
+.cave-explorer em { width: 100px; height: 3px; position: absolute; top: -13px; left: 13px; background: var(--gold); box-shadow: 25px 0 32px 13px rgba(255,201,106,.55); transform: rotate(20deg); transform-origin: left center; animation: flashlight 5s ease-in-out infinite; }
+.firefly { width: 8px; height: 8px; position: absolute; z-index: 3; border-radius: 50%; background: #bdffcb; box-shadow: 0 0 24px 7px rgba(103,255,203,.7); animation: firefly-float 5s ease-in-out infinite alternate; }
+.firefly-one { top: 47%; right: 25%; }
+.firefly-two { top: 64%; right: 18%; animation-delay: -2s; }
+.firefly-three { top: 56%; right: 41%; animation-delay: -3.2s; }
+.cave-scene .scene-copy { top: 22%; }
+
+.end-card {
+    min-height: 520px;
+    padding: 90px 8%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(ellipse at center,#394942,#17241f 67%);
+    text-align: center;
+}
+
+.end-card h2 { font-size: clamp(50px, 7vw, 88px); }
+.end-button { margin-top: 32px; padding: 16px 26px; border-radius: 40px; background: var(--gold); color: #19211c; font-size: 18px; font-weight: 900; text-decoration: none; transition: transform .2s, background .2s; }
+.end-button:hover { transform: translateY(-4px); background: #ffdc97; }
+.back-to-top { margin-top: 23px; color: white; font-size: 16px; text-decoration-thickness: 1px; text-underline-offset: 5px; }
+
+.sources-page { min-height: 100vh; background: linear-gradient(145deg,#17241f,#324239); }
+.sources-page .topbar { position: relative; }
+.sources-heading { max-width: 1000px; margin: 90px auto 55px; padding: 0 30px; }
+.sources-heading h1 { font-size: clamp(58px, 8vw, 94px); }
+.sources-heading > p:last-child { max-width: 760px; margin-top: 24px; color: rgba(255,255,255,.85); font-size: clamp(19px, 2.3vw, 25px); }
+.sources-list { width: min(1000px, 88%); margin: 0 auto 55px; }
+.source-card { padding: 30px 0; display: grid; grid-template-columns: 90px 1fr; gap: 20px; border-top: 1px solid rgba(255,255,255,.25); scroll-margin-top: 24px; }
+.source-number { color: var(--gold); font-family: var(--serif); font-size: 39px; }
+.source-card .scene-label { margin-bottom: 10px; font-size: 13px; }
+.source-card h2 { margin: 0; color: white; font-family: var(--serif); font-size: clamp(27px, 3.4vw, 38px); font-weight: 400; }
+.source-card p:not(.scene-label) { margin: 10px 0 13px; color: rgba(255,255,255,.8); font-size: 18px; }
+.source-card a { color: var(--gold); font-size: 17px; font-weight: 800; text-decoration-thickness: 1px; text-underline-offset: 5px; }
+.sources-page main > .end-button { display: table; margin: 0 auto 80px; }
+
+@keyframes appear { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes sunset { from { transform: translateY(12px); } to { transform: translateY(-15px); } }
+@keyframes distant-shift { from { transform: translateX(1%); } to { transform: translateX(-1%); } }
+@keyframes bridge-arrival { from { opacity: 0; transform: translateY(35px) scale(.96); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes walk-across { from { transform: translateX(-20px); } to { transform: translateX(220px); } }
+@keyframes walk-across-two { from { transform: translateX(-80px) scale(.78); } to { transform: translateX(180px) scale(.78); } }
+@keyframes walk-in-place { 50% { transform: translateY(-2px) rotate(1deg); } }
+@keyframes walking-legs { to { transform: rotate(22deg); } }
+@keyframes water-shimmer { from { opacity: .4; transform: translateX(-2%); } to { opacity: .8; transform: translateX(2%); } }
+@keyframes city-glow { from { filter: brightness(.9); } to { filter: brightness(1.13); } }
+@keyframes stone-rise { from { opacity: 0; transform: translateY(55px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes stone-breathe { from { filter: brightness(.85); } to { filter: brightness(1.08); } }
+@keyframes mist-drift { from { transform: translateX(-8%); } to { transform: translateX(8%); } }
+@keyframes cave-pulse { from { opacity: .48; transform: scale(.9); } to { opacity: .9; transform: scale(1.14); } }
+@keyframes pool-glow { from { filter: brightness(.75); } to { filter: brightness(1.35); } }
+@keyframes explorer-look { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(5deg); } }
+@keyframes flashlight { 0%, 100% { transform: rotate(12deg); } 50% { transform: rotate(-20deg); } }
+@keyframes firefly-float { from { transform: translate(0,0); opacity: .3; } to { transform: translate(-24px,-38px); opacity: 1; } }
+@keyframes bob { 50% { transform: translateY(6px); } }
+@keyframes grain-drift { 50% { transform: translateY(2px); } }
+
+@media (max-width: 700px) {
+    .topbar { height: 70px; padding: 0 6%; }
+    .wordmark { font-size: 16px; }
+    .wordmark span { font-size: 9px; }
+    .sources-button { padding: 8px 14px; font-size: 14px; }
+    .film-scene { min-height: 660px; height: 100svh; max-height: 900px; }
+    .opening { height: 100svh; min-height: 740px; }
+    .opening-copy { width: 88%; top: 19%; left: 6%; }
+    .opening h1 { font-size: clamp(54px, 13vw, 83px); }
+    .opening-copy > p:not(.scene-label) { max-width: 90%; font-size: 20px; }
+    .scene-label { font-size: 13px; letter-spacing: .14em; }
+    .sun { top: 36%; right: 15%; width: 110px; }
+    .mountain { bottom: 20%; }
+    .mountain-far { height: 38%; }
+    .mountain-near { height: 30%; }
+    .river { height: 31%; }
+    .bridge { width: 84%; height: 155px; right: -13%; bottom: 19%; }
+    .bridge-arch { border-width: 10px; }
+    .bridge-walkway { height: 13px; }
+    .traveller { transform: scale(.75); }
+    .traveller-two { transform: scale(.61); }
+    .film-credit { right: 6%; bottom: 19px; font-size: 11px; }
+    .scene-copy, .stones-scene .scene-copy, .cave-scene .scene-copy { width: 90%; top: 17%; left: 6%; }
+    .scene-copy h2 { max-width: 92%; font-size: clamp(47px, 11vw, 72px); }
+    .scene-copy > p:not(.scene-label) { max-width: 92%; font-size: 20px; }
+    .source-link { font-size: 17px; }
+    .scene-backdrop { background: linear-gradient(180deg,#526a73 0%,#d19a6c 45%,#566d6c 46%); }
+    .old-town { width: 47%; height: 32%; bottom: 24%; }
+    .stone-bridge { width: 82%; height: 28%; bottom: 22%; left: 9%; }
+    .stone-bridge span { border-width: 12px; }
+    .stecci { bottom: 14%; }
+    .stecci-small { right: 10%; transform: scale(.7); }
+    .stecci-tall { right: 39%; transform: scale(.74); }
+    .stecci-wide { right: -2%; transform: scale(.6); }
+    .mist { bottom: 5%; }
+    .cave-scene { background: radial-gradient(ellipse at 55% 75%,#236c67,#112e2c 43%,#101817 75%); }
+    .cave-light { width: 220px; height: 220px; top: 44%; right: 8%; }
+    .cave-pool { width: 70%; right: 5%; bottom: 12%; }
+    .cave-explorer { right: 30%; bottom: 14%; }
+    .end-card { min-height: 470px; padding: 65px 6%; }
+    .end-card h2 { font-size: clamp(46px, 10vw, 68px); }
+    .end-button { font-size: 16px; }
+    .sources-heading { margin: 60px auto 40px; padding: 0 7%; }
+    .sources-heading h1 { font-size: clamp(54px, 12vw, 78px); }
+    .sources-heading > p:last-child { font-size: 19px; }
+    .source-card { grid-template-columns: 48px 1fr; gap: 10px; padding: 23px 0; }
+    .source-number { font-size: 30px; }
+    .source-card p:not(.scene-label) { font-size: 17px; }
+    .sources-page main > .end-button { margin-bottom: 55px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .film-scene:not(.is-current) *, .film-scene:not(.is-current)::before, .film-scene:not(.is-current)::after {
+        animation-play-state: paused !important;
+    }
+}

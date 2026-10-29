@@ -1,12 +1,104 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bosnie</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <meta name="description" content="Een korte, filmische reis langs drie verrassende verhalen uit Bosnië en Herzegovina.">
+    <title>Een andere kijk op Bosnië</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    
+    <header class="topbar">
+        <a class="wordmark" href="index.html">BOSNIË <span>IN BEELD</span></a>
+        <a class="sources-button" href="bronnen.html">Bronnen <span aria-hidden="true">↗</span></a>
+    </header>
+    <div class="film-status" aria-live="off">
+        <span id="film-time">FILM · 00:00 / 02:00</span>
+        <span class="progress-track"><span id="film-progress"></span></span>
+    </div>
+
+    <main>
+        <section class="film-scene opening" id="start" aria-labelledby="opening-title">
+            <div class="opening-sky"></div>
+            <div class="sun"></div>
+            <div class="mountain mountain-far"></div>
+            <div class="mountain mountain-near"></div>
+            <div class="river"></div>
+            <div class="bridge">
+                <span class="bridge-arch arch-one"></span><span class="bridge-arch arch-two"></span><span class="bridge-arch arch-three"></span>
+                <span class="bridge-walkway"></span>
+                <span class="traveller traveller-one"><i></i><b></b></span>
+                <span class="traveller traveller-two"><i></i><b></b></span>
+            </div>
+            <div class="opening-copy">
+                <p class="scene-label">BOSNIË EN HERZEGOVINA</p>
+                <h1 id="opening-title">Een land.<br><em>Duizend verhalen.</em></h1>
+                <p>Kom mee. De film begint vanzelf.</p>
+            </div>
+            <span class="film-credit">EEN REIS VAN TWEE MINUTEN</span>
+            <span class="film-grain" aria-hidden="true"></span>
+        </section>
+
+        <section class="film-scene bridge-scene" id="brug" aria-labelledby="bridge-title">
+            <div class="scene-backdrop">
+                <div class="old-town town-left"></div>
+                <div class="old-town town-right"></div>
+                <div class="river-reflection"></div>
+                <div class="stone-bridge">
+                    <span></span>
+                    <div class="figure figure-walking"><i></i><b></b></div>
+                </div>
+            </div>
+            <div class="scene-copy">
+                <p class="scene-label">VERHAAL 01 · MOSTAR</p>
+                <h2 id="bridge-title">Een brug.<br><em>Opnieuw gebouwd.</em></h2>
+                <p>Herbouwd in 2004.<br>Een symbool van samenleven.</p>
+                <a class="source-link" href="bronnen.html#mostar">Meer over Mostar <span aria-hidden="true">↗</span></a>
+            </div>
+            <span class="film-credit">MOSTAR · 01 / 03</span>
+            <span class="film-grain" aria-hidden="true"></span>
+        </section>
+
+        <section class="film-scene stones-scene" id="stenen" aria-labelledby="stones-title">
+            <div class="mist mist-one"></div><div class="mist mist-two"></div>
+            <div class="stone-field">
+                <span class="stecci stecci-small">✳</span>
+                <span class="stecci stecci-tall">☼</span>
+                <span class="stecci stecci-wide">⌁</span>
+            </div>
+            <div class="scene-copy">
+                <p class="scene-label">VERHAAL 02 · OUDE GRAFSTENEN</p>
+                <h2 id="stones-title">Duizenden stenen.<br><em>Vier landen.</em></h2>
+                <p>Deze middeleeuwse grafstenen staan vol symbolen.<br>Ze liggen verspreid over vier landen.</p>
+                <a class="source-link" href="bronnen.html#stecci">Meer over de stećci <span aria-hidden="true">↗</span></a>
+            </div>
+            <span class="film-credit">STEĆCI · 02 / 03</span>
+            <span class="film-grain" aria-hidden="true"></span>
+        </section>
+
+        <section class="film-scene cave-scene" id="grot" aria-labelledby="cave-title">
+            <div class="cave-mouth"></div>
+            <div class="cave-light"></div>
+            <div class="cave-pool"></div>
+            <div class="cave-rock rock-left"></div><div class="cave-rock rock-right"></div>
+            <span class="cave-explorer"><i></i><b></b><em></em></span>
+            <span class="firefly firefly-one"></span><span class="firefly firefly-two"></span><span class="firefly firefly-three"></span>
+            <div class="scene-copy">
+                    <p class="scene-label">VJETRENICA · DE GROTWERELD</p>
+                    <h2 id="cave-title">Een verborgen wereld.<br><em>Vol leven.</em></h2>
+                    <p>Hier zijn meer dan 230 vormen van leven geregistreerd. Sommige zijn uniek.</p>
+                    <a class="source-link" href="bronnen.html#vjetrenica">Meer over de grot <span aria-hidden="true">↗</span></a>
+            </div>
+            <span class="film-credit">VJETRENICA · 03 / 03</span>
+            <span class="film-grain" aria-hidden="true"></span>
+        </section>
+
+        <section class="end-card">
+            <p class="scene-label">EINDE VAN DE FILM</p>
+            <h2>Bosnië.<br><em>Blijf nieuwsgierig.</em></h2>
+            <a class="end-button" href="bronnen.html">Bekijk de bronnen <span aria-hidden="true">↗</span></a>
+        </section>
+    </main>
+    <script src="js/film.js" defer></script>
 </body>
 </html>
